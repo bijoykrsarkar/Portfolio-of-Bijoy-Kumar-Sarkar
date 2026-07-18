@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSVP Movies SQL Analysis | Bijoy Kumar Sarkar</title>
+    <meta name="description" content="SQL analysis of an IMDB-scale movie database to build a genre, talent, and partnership strategy for a production house, by Bijoy Kumar Sarkar.">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .case-hero { padding: 160px 0 40px 0; }
+        .case-badge-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 30px 0; }
+        .case-badge { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: var(--text-secondary); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; }
+        .case-block { background: var(--bg-surface); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 30px; margin-bottom: 30px; }
+        .case-block h2 { font-size: 1.5rem; margin-bottom: 18px; color: var(--neon-cyan); }
+        .case-block p, .case-block li { color: var(--text-secondary); font-size: 1.02rem; margin-bottom: 12px; }
+        .case-block ul { padding-left: 20px; }
+        .case-block li::marker { color: var(--neon-purple); }
+        .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 20px 0; }
+        .stat-card { background: rgba(255,255,255,0.03); border-radius: 10px; padding: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
+        .stat-card h3 { font-size: 1.8rem; color: var(--neon-cyan); margin-bottom: 6px; }
+        .stat-card span { color: var(--text-secondary); font-size: 0.85rem; }
+        @media (max-width: 800px) { .stat-grid { grid-template-columns: 1fr 1fr; } }
+        .rec-row { display: flex; gap: 12px; margin-bottom: 14px; align-items: flex-start; }
+        .rec-row i { color: var(--neon-purple); margin-top: 4px; }
+        .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--text-secondary); margin-bottom: 20px; font-size: 0.95rem; }
+        .back-link:hover { color: var(--neon-cyan); }
+    </style>
+</head>
+<body style="background:#050508;">
+    <main style="margin-top:0;">
+        <section class="case-hero">
+            <a href="index.html#projects" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
+            <h1 class="gradient-headline" style="font-size: 2.6rem;">RSVP Movies: SQL Strategy Analysis</h1>
+            <p class="subtitle" style="font-size:1.1rem;">Turning an IMDB-scale database into a genre and talent investment plan</p>
+
+            <div class="case-badge-row">
+                <span class="case-badge">SQL</span>
+                <span class="case-badge">MySQL</span>
+                <span class="case-badge">Joins &amp; Subqueries</span>
+                <span class="case-badge">Business Strategy</span>
+            </div>
+
+            <div class="hero-cta-group">
+                <a href="https://github.com/bijoykrsarkar/rsvp-movies-sql-analysis" target="_blank" rel="noopener noreferrer" class="cta-button primary"><i class="fa-brands fa-github"></i> View Queries on GitHub</a>
+                <a href="index.html#projects" class="cta-button secondary">Back to Projects</a>
+            </div>
+        </section>
+
+        <section class="case-block scroll-reveal active">
+            <h2><i class="fa-solid fa-bullseye"></i> Problem</h2>
+            <p>RSVP Movies, a fictional production house, needs a data-backed answer to a very real question: what should we make next, and with whom? Rather than greenlighting projects on instinct, this project queries a relational, IMDB-style database &mdash; movies, genres, ratings, directors, and cast, across roughly 8,000 films and 25,000+ people &mdash; to ground genre choice, casting, and partnership decisions in actual performance data.</p>
+        </section>
+
+        <section class="case-block scroll-reveal active">
+            <h2><i class="fa-solid fa-diagram-project"></i> Approach</h2>
+            <p>Working across six linked tables (movies, genre, ratings, names, director mapping, role mapping), the analysis moved through four segments of increasing complexity: basic table-shape and null checks, aggregation and filtering to size up genres and years, subqueries to isolate top performers, and multi-table joins to connect a movie's genre and rating back to the specific directors and actors behind it.</p>
+        </section>
+
+        <section class="case-block scroll-reveal active">
+            <h2><i class="fa-solid fa-chart-line"></i> Key Findings</h2>
+            <div class="stat-grid">
+                <div class="stat-card"><h3>4,285</h3><span>Drama titles &mdash; the single largest genre by volume</span></div>
+                <div class="stat-card"><h3>1,078</h3><span>Drama releases in 2019 alone</span></div>
+                <div class="stat-card"><h3>Top 3</h3><span>Drama, Action, and Thriller lead every year sampled</span></div>
+            </div>
+            <p>Genre volume and rating data were then cross-referenced with director and cast performance to separate three distinct strategies: regionally-proven talent for local hits, globally-recognized studios and stars for international reach, and multilingual-friendly production companies for cross-market appeal &mdash; rather than one generic recommendation.</p>
+        </section>
+
+        <section class="case-block scroll-reveal active">
+            <h2><i class="fa-solid fa-list-check"></i> Strategic Output</h2>
+            <div class="rec-row"><i class="fa-solid fa-check"></i><p style="margin:0;"><strong>Genre:</strong> lead with Drama, backed by Action and Thriller as a diversification play.</p></div>
+            <div class="rec-row"><i class="fa-solid fa-check"></i><p style="margin:0;"><strong>Partnerships:</strong> different production partners recommended depending on whether the goal is regional, global, or multilingual reach.</p></div>
+            <div class="rec-row"><i class="fa-solid fa-check"></i><p style="margin:0;"><strong>Talent:</strong> director and cast shortlist derived from historical ratings and genre fit, not name recognition alone.</p></div>
+            <div class="rec-row"><i class="fa-solid fa-check"></i><p style="margin:0;"><strong>Roadmap:</strong> immediate, mid-term, and long-term moves, so the recommendation reads as a plan rather than a list of facts.</p></div>
+        </section>
+
+        <section class="case-block scroll-reveal active">
+            <h2><i class="fa-solid fa-lightbulb"></i> Why It Matters</h2>
+            <p>The SQL itself was the easy part &mdash; the real work was translating query output into a recommendation an actual decision-maker could act on. That's the same muscle I use turning audit and compliance data into recommendations for stakeholders: numbers only matter once someone can decide something because of them.</p>
+        </section>
+    </main>
+    <footer style="text-align:center; padding: 40px 0; color: var(--text-secondary); font-size: 0.9rem;">
+        <p>&copy; 2026 Bijoy Kumar Sarkar &middot; <a href="index.html" style="color: var(--neon-cyan);">Back to Portfolio</a></p>
+    </footer>
+</body>
+</html>
