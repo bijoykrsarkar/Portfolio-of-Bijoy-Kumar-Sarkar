@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://portfolio-bijoy-kumar-sarkar.vercel.app/sitemap.xml
