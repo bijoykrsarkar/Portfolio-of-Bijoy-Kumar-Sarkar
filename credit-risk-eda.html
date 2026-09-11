@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Risk EDA Case Study | Bijoy Kumar Sarkar</title>
+    <meta name="description" content="Exploratory data analysis on a 300,000+ row loan application dataset to identify the strongest drivers of loan default, by Bijoy Kumar Sarkar.">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .case-hero { padding: 160px 0 40px 0; }
+        .case-badge-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 30px 0; }
+        .case-badge { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: var(--text-secondary); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; }
+        .case-block { background: var(--bg-surface); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 30px; margin-bottom: 30px; }
+        .case-block h2 { font-size: 1.5rem; margin-bottom: 18px; color: var(--neon-cyan); }
+        .case-block p, .case-block li { color: var(--text-secondary); font-size: 1.02rem; margin-bottom: 12px; }
+        .case-block ul { padding-left: 20px; }
+        .case-block li::marker { color: var(--neon-purple); }
+        .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px; }
+        .chart-card { background: rgba(255,255,255,0.03); border-radius: 10px; padding: 16px; text-align: center; }
+        .chart-card img { max-width: 100%; border-radius: 6px; margin-bottom: 12px; background: #fff; }
+        .chart-card span { color: var(--text-secondary); font-size: 0.9rem; display: block; }
+        @media (max-width: 800px) { .chart-grid { grid-template-columns: 1fr; } }
+        .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--text-secondary); margin-bottom: 20px; font-size: 0.95rem; }
+        .back-link:hover { color: var(--neon-cyan); }
+    </style>
+</head>
+<body style="background:#050508;">
+    <main style="margin-top:0;">
+        <section class="case-hero">
+            <a href="index.html#projects" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
+            <h1 class="gradient-headline" style="font-size: 2.6rem;">Credit Risk EDA</h1>
+            <p class="subtitle" style="font-size:1.1rem;">Finding the strongest drivers of loan default in 300,000+ applications</p>
+
+            <div class="case-badge-row">
+                <span class="case-badge">Python</span>
+                <span class="case-badge">Pandas / NumPy</span>
+                <span class="case-badge">Matplotlib / Seaborn</span>
+                <span class="case-badge">Jupyter</span>
+                <span class="case-badge">Exploratory Data Analysis</span>
+            </div>
+
+            <div class="hero-cta-group">
+                <a href="https://github.com/bijoykrsarkar/credit-risk-eda" target="_blank" rel="noopener noreferrer" class="cta-button primary"><i class="fa-brands fa-github"></i> View Notebook on GitHub</a>
+                <a href="index.html#projects" class="cta-button secondary">Back to Projects</a>
+            </div>
+        </section>
+
+        <section class="case-block scroll-reveal active">
+            <h2><i class="fa-solid fa-bullseye"></i> Problem</h2>
+            <p>A consumer finance company approves loans partly on incomplete information, which creates two costly mistakes: rejecting applicants who would have repaid, and approving applicants who go on to default. This project analyzes the company's historical application data to identify which applicant and loan characteristics actually distinguish defaulters from reliable borrowers &mdash; insight that can feed directly into a risk model rather than gut-feel underwriting.</p>
+        </section>
+
+        <section class="case-block scroll-reveal active">
+            <h2><i class="fa-solid fa-diagram-project"></i> Approach</h2>
+            <ul>
+                <li><strong>Data cleaning:</strong> worked across two linked datasets (current and previous loan applications, ~307,500 and ~1.67M rows). Chose a different missing-value strategy per column based on its distribution &mdash; mean/median imputation where values were tightly clustered, mode imputation for count-like fields, and row deletion only where it cost under 1% of the data.</li>
+                <li><strong>Outlier handling</strong> on income, credit amount, and annuity fields before any comparison, so a handful of extreme values couldn't distort the conclusions.</li>
+                <li><strong>Feature engineering:</strong> converted raw day-counts into readable age and tenure fields, and binned age, income, credit amount, and external credit score into High/Medium/Low groups to make patterns comparable across segments.</li>
+                <li><strong>Univariate &rarr; segmented &rarr; bivariate analysis</strong> across categorical and continuous variables, then merged the current and previous application tables to test whether a client's prior loan history predicted their current risk.</li>
+            </ul>
+        </section>
+
+        <section class="case-block scroll-reveal active">
+            <h2><i class="fa-solid fa-chart-line"></i> Key Findings</h2>
+            <ul>
+                <li>Younger applicants defaulted at a noticeably higher rate than senior citizens &mdash; age behaved as a real risk signal, not just a demographic detail.</li>
+                <li>Counterintuitively, applicants in the higher income bracket accounted for more defaults than the lower-income group once volume was accounted for &mdash; income alone is a weak, sometimes misleading, risk proxy.</li>
+                <li>The external credit bureau score was the cleanest signal in the dataset: low scorers defaulted at a far higher rate almost regardless of any other variable.</li>
+                <li>Clients who had been refused on a previous application were more likely to default on their current loan than clients with no prior refusal &mdash; loan history carries forward.</li>
+                <li>Lower credit amounts were, somewhat surprisingly, associated with a higher chance of default than larger loans in this dataset.</li>
+            </ul>
+
+            <div class="chart-grid">
+                <div class="chart-card">
+                    <img src="credit-chart-imbalance.png" alt="Class imbalance across target, contract type, education, family status and housing type">
+                    <span>Data imbalance check across key categorical fields before analysis</span>
+                </div>
+                <div class="chart-card">
+                    <img src="credit-chart-income.png" alt="Defaulters and non-defaulters by income group">
+                    <span>Default counts by income group &mdash; the counterintuitive high-income pattern</span>
+                </div>
+                <div class="chart-card">
+                    <img src="credit-chart-correlation.png" alt="Correlation heatmap of numerical variables for defaulters">
+                    <span>Correlation structure among numerical variables, defaulters only</span>
+                </div>
+                <div class="chart-card">
+                    <img src="credit-chart-age-income.png" alt="Heatmap of age group against income group">
+                    <span>Age group vs. income group, segmented view</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="case-block scroll-reveal active">
+            <h2><i class="fa-solid fa-lightbulb"></i> Why It Matters</h2>
+            <p>The point of this analysis isn't the charts &mdash; it's that a handful of these signals (external score, prior refusal, age band) could realistically feed a lightweight scoring rule that flags high-risk applications for a second look, without needing a full ML model in production. That's the same instinct behind the quality-audit work I do day to day: find the variable that actually explains the outcome, not the one that's easiest to look at.</p>
+        </section>
+    </main>
+    <footer style="text-align:center; padding: 40px 0; color: var(--text-secondary); font-size: 0.9rem;">
+        <p>&copy; 2026 Bijoy Kumar Sarkar &middot; <a href="index.html" style="color: var(--neon-cyan);">Back to Portfolio</a></p>
+    </footer>
+</body>
+</html>
